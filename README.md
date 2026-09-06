@@ -1,143 +1,688 @@
 # ChatGaiya++ Compiler 🚀
 
-**ChatGaiya++** is a custom compiled programming language written in C++ that transpiles ChatGaiya++ source code (`.cg`) into executable Python 3 (`.py`). It features static type checking, lexical analysis, and syntax parsing for a language based on Chittagonian (Chatgaiya) dialect keywords.
+**ChatGaiya++** is a custom programming language and compiler written in **C++17**. It is designed around **Chittagonian (Chatgaiya) dialect-inspired keywords** and transpiles ChatGaiya++ source files (`.cg`) into executable **Python 3** code.
+
+The compiler demonstrates several core concepts of compiler design, including:
+
+* 🔤 Lexical Analysis
+* 🧩 Syntax Parsing
+* 🧠 Static Type Checking
+* ⚠️ Syntax & Type Error Detection
+* 🔄 Source-to-Source Translation
+* 🐍 Python 3 Code Generation
 
 ---
 
-## 🛠️ Build & Installation
+## ✨ Features
 
-Compile the ChatGaiya++ compiler using `g++` (C++17 or higher):
+* Custom programming language with Chatgaiya-inspired syntax
+* Integer, floating-point, string, and boolean data types
+* Variable declaration and assignment
+* Arithmetic and logical expressions
+* Operator precedence
+* `if`, `else if`, and `else` statements
+* `while` loops
+* `break` and `continue`
+* Console input and output
+* Automatic input type conversion
+* Increment and decrement operators
+* String concatenation
+* String indexing
+* Boolean input handling
+* Static type checking
+* Syntax error reporting
+* Python 3 code generation
+
+---
+
+## 🛠️ Technologies
+
+| Technology               | Purpose                                             |
+| ------------------------ | --------------------------------------------------- |
+| **C++17**                | Compiler implementation                             |
+| **Python 3**             | Generated target language                           |
+| **g++**                  | Compiler used to build ChatGaiya++                  |
+| **Standard C++ Library** | Lexing, parsing, type checking, and code generation |
+
+---
+
+## 📁 Project Structure
+
+```text
+ChatGaiya++/
+│
+├── main.cpp          # ChatGaiya++ compiler source code
+├── example.cg        # Example ChatGaiya++ program
+├── example.py        # Generated Python program
+└── README.md         # Project documentation
+```
+
+---
+
+# 🛠️ Build & Installation
+
+## Requirements
+
+Make sure the following are installed:
+
+* **g++** with C++17 support
+* **Python 3**
+
+You can verify the installations using:
+
+```bash
+g++ --version
+python3 --version
+```
+
+### Compile the Compiler
 
 ```bash
 g++ -std=c++17 -O2 main.cpp -o chatgaiya
-
 ```
 
----
-
-## 🚀 Usage
-
-Run the compiled executable to convert your ChatGaiya++ script into Python 3:
+On Windows, you can use:
 
 ```bash
-# Basic compilation (generates script.py)
-./chatgaiya script.cg
-
-# Specify custom output file
-./chatgaiya script.cg -o output.py
-
-# Execute the generated Python script
-python3 output.py
-
+g++ -std=c++17 -O2 main.cpp -o chatgaiya.exe
 ```
 
 ---
 
-## 📑 Language Reference & Syntax Mapping
+# 🚀 Usage
 
-### 1. Data Types & Keywords
+## 1. Compile a ChatGaiya++ Program
 
-| ChatGaiya++ | Equivalent Type / Keyword | Description |
-| --- | --- | --- |
-| `ongko` | `int` | Integer data type
+Suppose you have:
 
- |
-| `dhoshomik` | `float` | Floating-point data type
+```text
+example.cg
+```
 
- |
-| `kotha` | `string` | String data type
+Run:
 
- |
-| `ho` | `bool` | Boolean data type
+```bash
+./chatgaiya example.cg
+```
 
- |
-| `hasa` | `True` | Boolean true literal
+The compiler will generate:
 
- |
-| `misa` | `False` | Boolean false literal
+```text
+example.py
+```
 
- |
+On Windows:
 
----
-
-### 2. Control Flow & Loops
-
-| ChatGaiya++ | Python Equivalent | Description |
-| --- | --- | --- |
-| `zodi (...)` | `if ...:` | Conditional statement
-
- |
-| `noile zodi (...)` | `elif ...:` | Else-if conditional branch
-
- |
-| `noile` / `tokon` | `else:` | Else branch
-
- |
-| `zotokkhon (...)` | `while ...:` | While loop
-
- |
-| `tham;` | `break` | Exit loop
-
- |
-| `chol;` | `continue` | Skip to next loop iteration
-
- |
+```powershell
+.\chatgaiya.exe example.cg
+```
 
 ---
 
-### 3. Built-in I/O & Utility Commands
+## 2. Specify an Output File
 
-| Input Command / Syntax | Operation / Output | Description |
-| --- | --- | --- |
-| `lo()` | `input()` | Reads string input from console
+You can specify a custom Python output file:
 
- |
-| `ko(expr);` | `print(expr)` | Output expression to console
+```bash
+./chatgaiya example.cg -o output.py
+```
 
- |
-| `ki_type(expr)` | `"ongko"` / `"dhoshomik"` / etc. | Returns compile-time static type of expression as string
+On Windows:
 
- |
-| `shuru_kor` / `#include` | *(Ignored)* | Headers / include directive line
-
- |
+```powershell
+.\chatgaiya.exe example.cg -o output.py
+```
 
 ---
 
-### 4. Expression & Type Cast Examples
+## 3. Run the Generated Python Program
 
-| ChatGaiya++ Source Code | Transpiled Output | Result / Description |
-| --- | --- | --- |
-| **Input Assignment** |  |  |
-| `ongko x = lo();` | `x = int(input())` | Automatically casts `lo()` to target type `int`<br> |
-| `dhoshomik y = lo();` | `y = float(input())` | Automatically casts `lo()` to target type `float`<br> |
-| `ho z = lo();` | `z = (input().strip().lower() in ('hasa','true','1'))` | Boolean evaluation of input string
+```bash
+python3 output.py
+```
 
- |
-| `kotha s = lo();` | `s = input()` | Assigns raw string input
+On Windows:
 
- |
-| **Operators & Expressions** |  |  |
-| `x++;` / `x--;` | `x += 1` / `x -= 1` | Increment / decrement
-
- |
-| `"Age: " + age` | `"Age: " + str(age)` | Auto-stringification on mixed string concatenation
-
- |
-| `s[i]` | `_cg_charat(s, i)` | Safe string character indexing at position `i`<br> |
-| `a && b` | `(a and b)` | Logical AND
-
- |
-| `a || b` | `(a or b)` | Logical OR
-
- |
-| `!a` | `(not a)` | Logical NOT
-
- |
+```powershell
+python output.py
+```
 
 ---
 
-## 📝 Example Script (`example.cg`)
+# 📖 Language Reference
+
+## 1. Data Types
+
+ChatGaiya++ provides four basic data types.
+
+| ChatGaiya++ | Equivalent | Description           |
+| ----------- | ---------- | --------------------- |
+| `ongko`     | `int`      | Integer               |
+| `dhoshomik` | `float`    | Floating-point number |
+| `kotha`     | `string`   | String                |
+| `ho`        | `bool`     | Boolean               |
+
+### Example
+
+```cpp
+ongko age = 20;
+dhoshomik height = 5.8;
+kotha name = "Nafi";
+ho student = hasa;
+```
+
+---
+
+## 2. Boolean Values
+
+| ChatGaiya++ | Python  |
+| ----------- | ------- |
+| `hasa`      | `True`  |
+| `misa`      | `False` |
+
+Example:
+
+```cpp
+ho isStudent = hasa;
+
+zodi (isStudent) {
+    ko("Student");
+}
+```
+
+---
+
+# 🔀 Control Flow
+
+## If Statement
+
+ChatGaiya++ uses `zodi` for conditional statements.
+
+```cpp
+zodi (age >= 18) {
+    ko("Adult");
+}
+```
+
+Generated Python:
+
+```python
+if (age >= 18):
+    print("Adult")
+```
+
+---
+
+## If-Else Statement
+
+```cpp
+zodi (age >= 18) {
+    ko("Adult");
+} noile {
+    ko("Minor");
+}
+```
+
+Generated Python:
+
+```python
+if (age >= 18):
+    print("Adult")
+else:
+    print("Minor")
+```
+
+---
+
+## Else-If Statement
+
+Use `noile zodi` for an `else if` branch.
+
+```cpp
+zodi (marks >= 80) {
+    ko("A+");
+} noile zodi (marks >= 70) {
+    ko("A");
+} noile {
+    ko("Below A");
+}
+```
+
+Generated Python:
+
+```python
+if (marks >= 80):
+    print("A+")
+elif (marks >= 70):
+    print("A")
+else:
+    print("Below A")
+```
+
+---
+
+# 🔁 While Loop
+
+The `zotokkhon` keyword represents a `while` loop.
+
+```cpp
+ongko count = 0;
+
+zotokkhon (count < 5) {
+    ko(count);
+    count++;
+}
+```
+
+Generated Python:
+
+```python
+count = 0
+
+while (count < 5):
+    print(count)
+    count += 1
+```
+
+---
+
+## Break
+
+Use `tham` to exit a loop.
+
+```cpp
+zotokkhon (hasa) {
+    ko("Running");
+    tham;
+}
+```
+
+Equivalent Python:
+
+```python
+while True:
+    print("Running")
+    break
+```
+
+---
+
+## Continue
+
+Use `chol` to skip the current iteration.
+
+```cpp
+zotokkhon (count < 10) {
+    count++;
+
+    zodi (count == 5) {
+        chol;
+    }
+
+    ko(count);
+}
+```
+
+Equivalent Python:
+
+```python
+while count < 10:
+    count += 1
+
+    if count == 5:
+        continue
+
+    print(count)
+```
+
+---
+
+# 🖥️ Input & Output
+
+## Output
+
+Use `ko()` to print an expression.
+
+```cpp
+ko("Hello ChatGaiya++");
+```
+
+Generated Python:
+
+```python
+print("Hello ChatGaiya++")
+```
+
+Variables can also be printed:
+
+```cpp
+ongko age = 20;
+ko(age);
+```
+
+---
+
+## Input
+
+Use `lo()` to read input from the console.
+
+```cpp
+kotha name = lo();
+```
+
+Generated Python:
+
+```python
+name = input()
+```
+
+---
+
+# 🔄 Automatic Input Conversion
+
+ChatGaiya++ automatically converts input according to the declared variable type.
+
+### Integer
+
+```cpp
+ongko age = lo();
+```
+
+Generated Python:
+
+```python
+age = int(input())
+```
+
+### Floating Point
+
+```cpp
+dhoshomik height = lo();
+```
+
+Generated Python:
+
+```python
+height = float(input())
+```
+
+### String
+
+```cpp
+kotha name = lo();
+```
+
+Generated Python:
+
+```python
+name = input()
+```
+
+### Boolean
+
+```cpp
+ho status = lo();
+```
+
+Generated Python:
+
+```python
+status = (input().strip().lower() in ('hasa', 'true', '1'))
+```
+
+---
+
+# ➕ Operators & Expressions
+
+## Arithmetic Operators
+
+ChatGaiya++ supports common arithmetic operators:
+
+| Operator | Operation      |
+| -------- | -------------- |
+| `+`      | Addition       |
+| `-`      | Subtraction    |
+| `*`      | Multiplication |
+| `/`      | Division       |
+| `%`      | Modulo         |
+
+Example:
+
+```cpp
+ongko a = 10;
+ongko b = 3;
+
+ko(a + b);
+ko(a - b);
+ko(a * b);
+ko(a / b);
+ko(a % b);
+```
+
+---
+
+## Increment & Decrement
+
+ChatGaiya++ supports:
+
+```cpp
+x++;
+x--;
+```
+
+They are translated into:
+
+```python
+x += 1
+x -= 1
+```
+
+Example:
+
+```cpp
+ongko x = 10;
+
+x++;
+ko(x);
+
+x--;
+ko(x);
+```
+
+---
+
+# 🧠 Comparison Operators
+
+| Operator | Meaning               |
+| -------- | --------------------- |
+| `==`     | Equal                 |
+| `!=`     | Not equal             |
+| `>`      | Greater than          |
+| `<`      | Less than             |
+| `>=`     | Greater than or equal |
+| `<=`     | Less than or equal    |
+
+Example:
+
+```cpp
+zodi (age >= 18) {
+    ko("You can vote");
+}
+```
+
+---
+
+# 🔗 Logical Operators
+
+ChatGaiya++ supports:
+
+| ChatGaiya++ | Python | Meaning     |
+| ----------- | ------ | ----------- |
+| `&&`        | `and`  | Logical AND |
+| `\|\|`      | `or`   | Logical OR  |
+| `!`         | `not`  | Logical NOT |
+
+Example:
+
+```cpp
+zodi (age >= 18 && student == hasa) {
+    ko("Adult student");
+}
+```
+
+Generated Python:
+
+```python
+if (age >= 18 and student == True):
+    print("Adult student")
+```
+
+---
+
+# 🔤 Strings
+
+Strings are represented using the `kotha` type.
+
+```cpp
+kotha name = "Nafi";
+kotha university = "Leading University";
+
+ko(name);
+ko(university);
+```
+
+---
+
+## String Concatenation
+
+Strings can be combined using `+`.
+
+```cpp
+kotha name = "Nafi";
+
+ko("Hello " + name);
+```
+
+Generated Python:
+
+```python
+print("Hello " + str(name))
+```
+
+ChatGaiya++ automatically converts non-string values when they are concatenated with strings.
+
+Example:
+
+```cpp
+ongko age = 21;
+
+ko("Age: " + age);
+```
+
+Generated Python:
+
+```python
+print("Age: " + str(age))
+```
+
+---
+
+# 🔢 String Indexing
+
+String characters can be accessed using an index.
+
+```cpp
+kotha name = "Nafi";
+
+ko(name[0]);
+```
+
+ChatGaiya++ translates string indexing through its internal character-access mechanism.
+
+Conceptually:
+
+```python
+_cg_charat(name, 0)
+```
+
+This provides controlled character access for the generated Python program.
+
+---
+
+# 🧪 Static Type Checking
+
+ChatGaiya++ performs static type checking during compilation.
+
+For example:
+
+```cpp
+ongko x = "Hello";
+```
+
+will result in a compilation error because `ongko` expects an integer.
+
+Similarly:
+
+```cpp
+dhoshomik x = "ChatGaiya";
+```
+
+is invalid because a string cannot be assigned directly to a floating-point variable.
+
+This allows many type-related errors to be detected **before the generated Python program is executed**.
+
+---
+
+# 🔍 Type Inspection
+
+ChatGaiya++ provides:
+
+```cpp
+ki_type(expr)
+```
+
+to inspect the compile-time type of an expression.
+
+Possible results include:
+
+```text
+ongko
+dhoshomik
+kotha
+ho
+```
+
+Example:
+
+```cpp
+ongko age = 20;
+
+ko(ki_type(age));
+```
+
+---
+
+# 📦 Include / Header Syntax
+
+ChatGaiya++ supports header/include-style lines such as:
+
+```cpp
+shuru_kor
+```
+
+and:
+
+```cpp
+#include
+```
+
+These directives are currently ignored by the compiler and do not generate Python code.
+
+---
+
+# 📝 Complete Example
+
+### `example.cg`
 
 ```cpp
 ongko num = 10;
@@ -155,14 +700,14 @@ zodi (num > 5) {
 }
 
 ongko count = 0;
+
 zotokkhon (count < 3) {
     ko(count);
     count++;
 }
-
 ```
 
-### Generated Python Code (`example.py`)
+### Generated `example.py`
 
 ```python
 #!/usr/bin/env python3
@@ -170,16 +715,166 @@ zotokkhon (count < 3) {
 
 num = 10
 name = ""
+
 print("Enter your name:")
 name = input()
+
 print("Hello " + str(name))
+
 if (num > 5):
     print("Number is greater than 5")
 else:
     print("Number is 5 or less")
+
 count = 0
+
 while (count < 3):
     print(count)
     count += 1
-
 ```
+
+### Example Output
+
+```text
+Enter your name:
+Nafi
+Hello Nafi
+Number is greater than 5
+0
+1
+2
+```
+
+---
+
+# 🏗️ Compilation Pipeline
+
+ChatGaiya++ follows a simplified compiler pipeline:
+
+```text
+        ChatGaiya++ Source
+              (.cg)
+                │
+                ▼
+        ┌─────────────────┐
+        │ Lexical Analysis│
+        └────────┬────────┘
+                 │
+                 ▼
+        ┌─────────────────┐
+        │ Syntax Parsing  │
+        └────────┬────────┘
+                 │
+                 ▼
+        ┌─────────────────┐
+        │ Static Type     │
+        │ Checking        │
+        └────────┬────────┘
+                 │
+                 ▼
+        ┌─────────────────┐
+        │ Python Code     │
+        │ Generation      │
+        └────────┬────────┘
+                 │
+                 ▼
+          Python 3 Program
+               (.py)
+```
+
+---
+
+# 🎯 Project Goals
+
+The main goal of ChatGaiya++ is to demonstrate how a programming language and compiler can be designed from scratch using C++.
+
+The project focuses on:
+
+1. Designing a custom programming language
+2. Creating a lexer/tokenizer
+3. Parsing language syntax
+4. Implementing static type checking
+5. Handling syntax and semantic errors
+6. Translating the custom language into another programming language
+7. Generating executable Python 3 code
+
+---
+
+# 📚 Example Keywords
+
+| Keyword           | Purpose                  |
+| ----------------- | ------------------------ |
+| `ongko`           | Integer                  |
+| `dhoshomik`       | Floating point           |
+| `kotha`           | String                   |
+| `ho`              | Boolean                  |
+| `hasa`            | True                     |
+| `misa`            | False                    |
+| `zodi`            | If                       |
+| `noile zodi`      | Else-if                  |
+| `noile` / `tokon` | Else                     |
+| `zotokkhon`       | While                    |
+| `tham`            | Break                    |
+| `chol`            | Continue                 |
+| `lo()`            | Input                    |
+| `ko()`            | Output                   |
+| `ki_type()`       | Type inspection          |
+| `shuru_kor`       | Include/header directive |
+
+---
+
+# 🚧 Future Improvements
+
+Possible future additions include:
+
+* `for` loops
+* Functions and return values
+* Arrays/lists
+* User-defined data structures
+* More advanced type checking
+* Better error recovery
+* Compiler optimization
+* Additional built-in functions
+* Module/import system
+* Improved Python code generation
+* More comprehensive standard library
+* Interactive REPL
+* VS Code syntax highlighting
+* Better compiler diagnostics
+
+---
+
+# 🤝 Contributing
+
+Contributions, suggestions, and improvements are welcome.
+
+If you would like to contribute:
+
+```bash
+git clone <repository-url>
+cd ChatGaiya++
+```
+
+Create a new branch:
+
+```bash
+git checkout -b feature/your-feature
+```
+
+Make your changes, test them, and submit a pull request.
+
+---
+
+# 👨‍💻 Author
+
+**Md. Fahmidur Rahman Nafi**
+
+ChatGaiya++ was developed as a compiler-design project to explore the fundamentals of programming language implementation and source-to-source compilation.
+
+---
+
+# 📄 License
+
+This project is available for educational and learning purposes.
+
+Add an appropriate open-source license such as **MIT License** if you intend to allow unrestricted reuse and modification.
