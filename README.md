@@ -865,11 +865,11 @@ Make your changes, test them, and submit a pull request.
 
 ---
 
-# 👨‍💻 Author
+# 👨‍💻 Authors
 
-**Md. Fahmidur Rahman Nafi**
-
-ChatGaiya++ was developed as a compiler-design project to explore the fundamentals of programming language implementation and source-to-source compilation.
+* Md. Fahmidur Rahman Nafi
+* Halima Akter Nila
+* Mansurul Islam Abrar
 
 ---
 
